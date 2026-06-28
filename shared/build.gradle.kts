@@ -72,3 +72,8 @@ kotlin {
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
 }
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.vigovlugt.fiveenative.resources"
+}
