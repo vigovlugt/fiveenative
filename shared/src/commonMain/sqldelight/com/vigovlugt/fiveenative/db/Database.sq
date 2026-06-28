@@ -1,0 +1,26 @@
+CREATE TABLE source (
+    id INTEGER NOT NULL PRIMARY KEY,
+    url TEXT NOT NULL
+);
+
+CREATE TABLE background (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    source TEXT,
+    json TEXT NOT NULL
+);
+
+getSource:
+SELECT url FROM source WHERE id = 0;
+
+setSource:
+INSERT OR REPLACE INTO source(id, url) VALUES (0, ?);
+
+selectAllBackgrounds:
+SELECT * FROM background ORDER BY name;
+
+insertBackground:
+INSERT INTO background(name, source, json) VALUES (?, ?, ?);
+
+deleteAllBackgrounds:
+DELETE FROM background;
