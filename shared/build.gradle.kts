@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -17,7 +16,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
-            linkerOpts("-lsqlite3")
         }
     }
     
@@ -46,8 +44,6 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
-            implementation(libs.sqldelight.androidDriver)
-            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -58,36 +54,15 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.navigation.compose)
             implementation(libs.kotlinx.coroutinesCore)
             implementation(libs.kotlinx.serializationJson)
-            implementation(libs.sqldelight.runtime)
-            implementation(libs.sqldelight.coroutinesExtensions)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.contentNegotiation)
-            implementation(libs.ktor.serialization.kotlinxJson)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        iosMain.dependencies {
-            implementation(libs.sqldelight.nativeDriver)
-            implementation(libs.ktor.client.darwin)
-        }
-        jvmMain.dependencies {
-            implementation(libs.sqldelight.sqliteDriver)
-            implementation(libs.ktor.client.cio)
-        }
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
-            implementation(libs.ktor.client.js)
-        }
-    }
-}
-
-sqldelight {
-    databases {
-        create("Database") {
-            packageName.set("com.vigovlugt.fiveenative.db")
         }
     }
 }
